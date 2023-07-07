@@ -1,0 +1,68 @@
+
+<Directory /var/www/dominio.com>
+		AllowOverride None
+		Require all denied
+</Directory>
+
+<VirtualHost *:80>
+
+
+	        DocumentRoot /var/www/dominio.com
+						
+		ServerName dominio.com
+		ServerAdmin webmaster@dominio.comh
+
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+		<Directory /var/www/dominio.com>
+				Options +SymlinksIfOwnerMatch
+				AllowOverride All
+				Require all granted
+		</Directory>
+
+		RewriteEngine on
+	  	RewriteCond %{HTTPS} off
+                RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE	
+
+</VirtualHost>
+
+<VirtualHost *:443>
+
+                DocumentRoot /var/www/dominio.com
+
+                ServerName dominio.com
+                ServerAdmin webmaster@dominio.com
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+                <Directory /var/www/class.codescript.tech>
+                                Options +SymlinksIfOwnerMatch
+                                AllowOverride All
+                                Require all granted
+                </Directory>
+
+  <IfModule mod_ssl.c>
+		SSLEngine on
+		SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+		SSLHonorCipherOrder     on
+		SSLCertificateFile /etc/letsencrypt/live/dominio.com/cert.pem
+		SSLCertificateKeyFile /etc/letsencrypt/live/dominio.com/privkey.pem
+		SSLUseStapling on
+		SSLStaplingResponderTimeout 5
+		SSLStaplingReturnResponderErrors off
+		      </IfModule>
+
+		<Directory /var/www/dominio.com>
+				Options +SymlinksIfOwnerMatch
+				AllowOverride All
+				Require all granted
+		</Directory>
+
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+        SSLStaplingCache shmcb:/var/run/ocsp(128000)
+</IfModule>

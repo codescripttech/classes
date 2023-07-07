@@ -1,0 +1,4 @@
+Alias /.well-known/acme-challenge /usr/local/acme/.well-known/acme-challenge
+<Directory /usr/local/acme/.well-known/acme-challenge>
+				Require all granted
+</Directory>

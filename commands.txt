@@ -1,0 +1,9 @@
+---enable vhost---
+sudo ln -s /etc/apache2/sites-available/dominio.vhost /etc/apache2/sites-enabled/100-dominio.vhost
+---create folder for acme---
+$ mkdir /usr/local/acme
+$ mkdir /usr/local/acme/.well-known/
+---creat acme.conf---
+$ vim /etc/apache2/sites-available/acme.conf
+---enable acme.conf---
+$ sudo ln -s /etc/apache2/sites-available/acme.conf /etc/apache2/sites-enabled/999-acme.conf
