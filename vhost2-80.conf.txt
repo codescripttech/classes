@@ -1,0 +1,34 @@
+<Directory /var/www/demo2>
+                AllowOverride None
+                Require all denied
+</Directory>
+
+<VirtualHost _default_:80>
+
+                DocumentRoot /var/www/demo2
+
+                ServerName demo2.com
+
+                ServerAdmin webmaster@demo2
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+                <Directory /var/www/demo2>
+                        # Clear PHP settings of this website
+                        <FilesMatch ".+\.ph(p[345]?|t|tml)$">
+                                SetHandler None
+                        </FilesMatch>
+                                Options +SymlinksIfOwnerMatch
+                                AllowOverride All
+                                Require all granted
+                        <Files ~ '.php[s3-6]{0,1}$'>
+                                                                                                                       $                        </Files>
+                </Directory>
+
+                RewriteEngine on
+                RewriteCond %{HTTPS} off
+                RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE]
+                # add support for apache mpm_itk
+
+</VirtualHost>
