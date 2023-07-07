@@ -1,0 +1,30 @@
+---first---
+$ apt-get update; apt-get updgrade
+--update python version--
+$ python -V
+$ wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
+$ tar xzf Python-3.9.6.tgz 
+$ cd Python-3.9.6 && ./configure --enable-optimizations
+$ make altinstall
+$ ls /usr/local/bin/python*
+$ update-alternatives --install /usr/bin/python python /usr/local/bin/python3.9 1
+--apache2---
+$ apt install apache2
+$ systemctl enable apache2
+$ systemctl status apache2
+--removing default--
+$ a2dissite 000-default.conf
+--add folder for project--
+$ mkdir /var/www/dominio
+$ vim /var/www/dominio/index.html
+--vhost:80---
+$ vim /etc/apache2/sites-available/000-dominio.conf
+$ a2ensite 000-dominio.conf
+--generate cert--
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned2.key -out /etc/ssl/certs/apache-selfsigned2.crt
+--adding mods--
+$ a2enmod ssl
+$ a2enmod rewrite
+--vhost:443---
+$ vim /etc/apache2/sites-available/000-dominio-ssl.conf
+$ a2ensite 000-dominio-ssl.conf
