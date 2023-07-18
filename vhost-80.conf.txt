@@ -15,15 +15,7 @@
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
 
                 <Directory /var/www/demo>
-                        # Clear PHP settings of this website
-                        <FilesMatch ".+\.ph(p[345]?|t|tml)$">
-                                SetHandler None
-                        </FilesMatch>
-                                Options +SymlinksIfOwnerMatch
-                                AllowOverride All
                                 Require all granted
-                        <Files ~ '.php[s3-6]{0,1}$'>
-                                                                                                                       $                        </Files>
                 </Directory>
 
                 RewriteEngine on
