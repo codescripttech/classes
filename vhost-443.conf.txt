@@ -20,14 +20,6 @@
                 SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
 
                 <Directory /var/www/demo>
-                # Clear PHP settings of this website
-                        <FilesMatch ".+\.ph(p[345]?|t|tml)$">
-                                SetHandler None
-                        </FilesMatch>
-                        Options +SymlinksIfOwnerMatch
-                        AllowOverride All
                         Require all granted
-                        <Files ~ '.php[s3-6]{0,1}$'>
-                                                                                                        Require all den$                        </Files>
                 </Directory>
 </VirtualHost>
